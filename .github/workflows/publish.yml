@@ -49,7 +49,7 @@ jobs:
       - name: Generate reprex
         run: |
           mkdir -p _includes
-          Rscript -e 'reprex::reprex(input = "reprex.R", wd = "./_includes/reprex.md")'
+          Rscript -e 'reprex::reprex(input = "reprex.R", wd = "./_includes/")'
     
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
