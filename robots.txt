@@ -1,1 +1,1 @@
-Sitemap: https://isaactpetersen.github.io/QuartoReprex/sitemap.xml
+Sitemap: https://isaactpetersen.github.io/QuartoReprexForEdit/sitemap.xml
