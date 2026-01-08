@@ -102,8 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 </head>
@@ -186,29 +184,31 @@ Attaching package: 'lme4'</code></pre>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataToImpute)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Subject"],"name":[1],"type":["int"],"align":["right"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["height"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Occasion"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"13","2":"-1.0000","3":"140.5","4":"1","_rn_":"1"},{"1":"13","2":"-0.7479","3":"143.4","4":"2","_rn_":"2"},{"1":"13","2":"-0.4630","3":"144.8","4":"3","_rn_":"3"},{"1":"13","2":"-0.1643","3":"147.1","4":"4","_rn_":"4"},{"1":"13","2":"-0.0027","3":"147.7","4":"5","_rn_":"5"},{"1":"13","2":"0.2466","3":"150.2","4":"6","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Subject     age height Occasion
+1      13 -1.0000  140.5        1
+2      13 -0.7479  143.4        2
+3      13 -0.4630  144.8        3
+4      13 -0.1643  147.1        4
+5      13 -0.0027  147.7        5
+6      13  0.2466  150.2        6</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Subject age height Occasion
@@ -219,18 +219,18 @@ Occasion       0   0      0        0</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -263,8 +263,8 @@ Occasion       0   0      0        0</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mi_mice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mi_mice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Class: mids
@@ -281,20 +281,20 @@ Occasion       0   0      0        0</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>fit_lmer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>fit_lmer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>call :
@@ -376,31 +376,43 @@ Fixed Effects:
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["effect"],"name":[1],"type":["chr"],"align":["left"]},{"label":["term"],"name":[2],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["nobs"],"name":[6],"type":["int"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"fixed","2":"(Intercept)","3":"142.5997228","4":"3.7690197","5":"37.8346982","6":"234","7":"229"},{"1":"fixed","2":"age","3":"1.0614933","4":"2.7851398","5":"0.3811275","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.3816669","4":"0.6974436","5":"1.9810447","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"143.7898267","4":"3.8699720","5":"37.1552632","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.0108190","4":"2.8698447","5":"0.7006717","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.1374912","4":"0.7186551","5":"1.5828055","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"145.1146986","4":"3.8465114","5":"37.7263145","6":"234","7":"229"},{"1":"fixed","2":"age","3":"3.0650767","4":"2.8478444","5":"1.0762795","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"0.8654705","4":"0.7131458","5":"1.2135954","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"144.8402500","4":"3.8858785","5":"37.2734892","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.8337679","4":"2.8844146","5":"0.9824413","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"0.9239697","4":"0.7223036","5":"1.2791986","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"144.2650388","4":"3.9555015","5":"36.4719969","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.4283781","4":"2.9485572","5":"0.8235818","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.0467552","4":"0.7383659","5":"1.4176645","6":"234","7":"229"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 7
+   effect term        estimate std.error statistic  nobs df.residual
+   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;
+ 1 fixed  (Intercept)  143.        3.77     37.8     234         229
+ 2 fixed  age            1.06      2.79      0.381   234         229
+ 3 fixed  Occasion       1.38      0.697     1.98    234         229
+ 4 fixed  (Intercept)  144.        3.87     37.2     234         229
+ 5 fixed  age            2.01      2.87      0.701   234         229
+ 6 fixed  Occasion       1.14      0.719     1.58    234         229
+ 7 fixed  (Intercept)  145.        3.85     37.7     234         229
+ 8 fixed  age            3.07      2.85      1.08    234         229
+ 9 fixed  Occasion       0.865     0.713     1.21    234         229
+10 fixed  (Intercept)  145.        3.89     37.3     234         229
+11 fixed  age            2.83      2.88      0.982   234         229
+12 fixed  Occasion       0.924     0.722     1.28    234         229
+13 fixed  (Intercept)  144.        3.96     36.5     234         229
+14 fixed  age            2.43      2.95      0.824   234         229
+15 fixed  Occasion       1.05      0.738     1.42    234         229</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11] [0 ×
-11]&gt;", : replacement element 1 has 1 row to replace 0 rows</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11] [0 ×
-11]&gt;", : replacement element 2 has 1 row to replace 0 rows</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error:
-! arguments imply differing number of rows: 1, 0</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>Class: mipo    m = 5 
+         term m   estimate       ubar          b          t dfcom       df
+1 (Intercept) 5 144.121907 14.9447772 0.98736515 16.1296154   229 163.8540
+2         age 5   2.279907  8.2234135 0.62555930  8.9740847   229 152.5285
+3    Occasion 5   1.071071  0.5156753 0.04134577  0.5652902   229 148.0509
+         riv     lambda        fmi
+1 0.07928109 0.07345731 0.08456334
+2 0.09128462 0.08364877 0.09543248
+3 0.09621351 0.08776895 0.09984741</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -433,21 +445,21 @@ other attached packages:
 [4] mice_3.19.0         nlme_3.1-168       
 
 loaded via a namespace (and not attached):
- [1] future_1.68.0      generics_0.1.4     tidyr_1.3.2        shape_1.4.6.1     
- [5] lattice_0.22-7     listenv_0.10.0     digest_0.6.39      magrittr_2.0.4    
- [9] mitml_0.4-5        evaluate_1.0.5     grid_4.5.2         iterators_1.0.14  
-[13] fastmap_1.2.0      foreach_1.5.2      jomo_2.7-6         jsonlite_2.0.0    
-[17] glmnet_4.1-10      nnet_7.3-20        backports_1.5.0    survival_3.8-3    
-[21] purrr_1.2.0        codetools_0.2-20   reformulas_0.4.3.1 Rdpack_2.6.4      
-[25] cli_3.6.5          rlang_1.1.6        rbibutils_2.4      parallelly_1.46.1 
-[29] splines_4.5.2      withr_3.0.2        yaml_2.3.12        pan_1.9           
-[33] parallel_4.5.2     tools_4.5.2        nloptr_2.2.1       minqa_1.2.8       
-[37] dplyr_1.1.4        forcats_1.0.1      globals_0.18.0     boot_1.3-32       
-[41] broom_1.0.11       vctrs_0.6.5        R6_2.6.1           rpart_4.1.24      
-[45] lifecycle_1.0.5    MASS_7.3-65        furrr_0.3.1        pkgconfig_2.0.3   
-[49] pillar_1.11.1      glue_1.8.0         Rcpp_1.1.0         xfun_0.55         
-[53] tibble_3.3.0       tidyselect_1.2.1   knitr_1.51         htmltools_0.5.9   
-[57] rmarkdown_2.30     compiler_4.5.2    </code></pre>
+ [1] utf8_1.2.6         future_1.68.0      generics_0.1.4     tidyr_1.3.2       
+ [5] shape_1.4.6.1      lattice_0.22-7     listenv_0.10.0     digest_0.6.39     
+ [9] magrittr_2.0.4     mitml_0.4-5        evaluate_1.0.5     grid_4.5.2        
+[13] iterators_1.0.14   fastmap_1.2.0      foreach_1.5.2      jomo_2.7-6        
+[17] jsonlite_2.0.0     glmnet_4.1-10      nnet_7.3-20        backports_1.5.0   
+[21] survival_3.8-3     purrr_1.2.0        codetools_0.2-20   reformulas_0.4.3.1
+[25] Rdpack_2.6.4       cli_3.6.5          rlang_1.1.6        rbibutils_2.4     
+[29] parallelly_1.46.1  splines_4.5.2      withr_3.0.2        yaml_2.3.12       
+[33] pan_1.9            parallel_4.5.2     tools_4.5.2        nloptr_2.2.1      
+[37] minqa_1.2.8        dplyr_1.1.4        forcats_1.0.1      globals_0.18.0    
+[41] boot_1.3-32        broom_1.0.11       vctrs_0.6.5        R6_2.6.1          
+[45] rpart_4.1.24       lifecycle_1.0.5    MASS_7.3-65        furrr_0.3.1       
+[49] pkgconfig_2.0.3    pillar_1.11.1      glue_1.8.0         Rcpp_1.1.0        
+[53] xfun_0.55          tibble_3.3.0       tidyselect_1.2.1   knitr_1.51        
+[57] htmltools_0.5.9    rmarkdown_2.30     compiler_4.5.2    </code></pre>
 </div>
 </div>
 
