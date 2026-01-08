@@ -75,17 +75,17 @@ fit_lmer
 summary(fit_lmer)
 ```
 
-```r
+```{r}
 # Pooled results
 mice::pool(fit_lmer)
 ```
 
-```r
+```{r}
 # Pooled results
 mice::pool(fit_lmer)
 ```
 
-```r
+```{r}
 # Session Info
 sessionInfo()
 ```
