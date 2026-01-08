@@ -17,7 +17,7 @@ format:
       warning: true
     number-sections: true
     code-fold: show
-    df-print: paged
+    #df-print: paged
     code-tools:
       source: true
       toggle: true
