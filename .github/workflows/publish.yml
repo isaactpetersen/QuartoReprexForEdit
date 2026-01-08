@@ -63,5 +63,7 @@ jobs:
         if: always() # ensures it runs even if previous steps fail
         uses: actions/upload-artifact@v4 # update
         with:
-          name: site
-          path: _site/
+          name: workspace
+          path: |
+            .
+            !.git/
