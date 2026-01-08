@@ -1,8 +1,5 @@
 ---
 title: "Minimal Reproducible Example"
-output:
-  html_document: 
-    df_print: default
 ---
 
 # Quarto Reprex (via GitHub Actions on Linux) {#sec-quarto}
@@ -11,81 +8,27 @@ The following reprex is from Quarto (via GitHub Actions on Linux):
 
 ```{r}
 # Load libraries
-library("nlme")
 library("mice")
-library("lme4")
-library("broom.mixed")
 
-# Import data
-data(Oxboys, package = "nlme")
+# Impute data
+imp <- mice::mice(
+  nhanes,
+  maxit = 2,
+  m = 2)
 
-# Prepare data & add missing values
-Oxboys_addNA <- data.frame(Oxboys)
+# Fit regression model to multiply imputed data
+fit <- with(
+  data = imp,
+  exp = lm(bmi ~ hyp + chl))
 
-Oxboys_addNA$Subject <- as.integer(Oxboys_addNA$Subject)
-Oxboys_addNA$Occasion <- as.integer(Oxboys_addNA$Occasion)
+# Pool results across models
+fit_pooled <- mice::pool(fit)
 
-set.seed(52242)
-Oxboys_addNA[sample(1:nrow(Oxboys_addNA), 25), "height"] <- NA
+# Summarize pooled results
+fit_pooled
 
-dataToImpute <- Oxboys_addNA
+summary(fit_pooled)
 
-head(dataToImpute)
-
-# Imputation settings
-numImputations <- 5
-
-varsToImpute <- c("height")
-
-pred <- make.predictorMatrix(dataToImpute)
-pred[1:nrow(pred), 1:ncol(pred)] <- 0
-pred[varsToImpute, "Subject"] <- (-2) # cluster variable
-pred[varsToImpute, "Occasion"] <- 1 # fixed effect predictor
-pred[varsToImpute, "age"] <- 2 # random effect predictor
-pred[varsToImpute, varsToImpute] <- 1 # fixed effect predictor
-
-diag(pred) <- 0
-pred
-
-meth <- make.method(dataToImpute)
-meth[1:length(meth)] <- ""
-meth[varsToImpute] <- "2l.norm"
-
-# Multiply impute data
-mi_mice <- mice(
-  as.data.frame(dataToImpute),
-  method = meth,
-  predictorMatrix = pred,
-  m = numImputations,
-  maxit = 5,
-  seed = 52242)
-
-# Summary and diagnostics
-mi_mice
-
-mi_mice$loggedEvents
-
-# Mixed model
-fit_lmer <- with(
-  data = mi_mice,
-  expr = lme4::lmer(height ~ age + Occasion + (1|Subject)))
-
-# Model results
-fit_lmer
-summary(fit_lmer)
-```
-
-```{r}
-# Pooled results
-mice::pool(fit_lmer)
-```
-
-```{r}
-# Pooled results
-mice::pool(fit_lmer)
-```
-
-```{r}
 # Session Info
 sessionInfo()
 ```
@@ -100,9 +43,8 @@ The following reprex on Linux (via GitHub Actions) is from the output of [`repre
 
 The following reprex is from running the code locally on my PC:
 
-```r
+``` r
 # Load libraries
-library("nlme")
 library("mice")
 #> 
 #> Attaching package: 'mice'
@@ -112,238 +54,50 @@ library("mice")
 #> The following objects are masked from 'package:base':
 #> 
 #>     cbind, rbind
-library("lme4")
-#> Loading required package: Matrix
-#> 
-#> Attaching package: 'lme4'
-#> The following object is masked from 'package:mice':
-#> 
-#>     toenail
-#> The following object is masked from 'package:nlme':
-#> 
-#>     lmList
-library("broom.mixed")
 
-# Import data
-data(Oxboys, package = "nlme")
-
-# Prepare data & add missing values
-Oxboys_addNA <- data.frame(Oxboys)
-
-Oxboys_addNA$Subject <- as.integer(Oxboys_addNA$Subject)
-Oxboys_addNA$Occasion <- as.integer(Oxboys_addNA$Occasion)
-
-set.seed(52242)
-Oxboys_addNA[sample(1:nrow(Oxboys_addNA), 25), "height"] <- NA
-
-dataToImpute <- Oxboys_addNA
-
-head(dataToImpute)
-#>   Subject     age height Occasion
-#> 1      13 -1.0000  140.5        1
-#> 2      13 -0.7479  143.4        2
-#> 3      13 -0.4630  144.8        3
-#> 4      13 -0.1643  147.1        4
-#> 5      13 -0.0027  147.7        5
-#> 6      13  0.2466  150.2        6
-
-# Imputation settings
-numImputations <- 5
-
-varsToImpute <- c("height")
-
-pred <- make.predictorMatrix(dataToImpute)
-pred[1:nrow(pred), 1:ncol(pred)] <- 0
-pred[varsToImpute, "Subject"] <- (-2) # cluster variable
-pred[varsToImpute, "Occasion"] <- 1 # fixed effect predictor
-pred[varsToImpute, "age"] <- 2 # random effect predictor
-pred[varsToImpute, varsToImpute] <- 1 # fixed effect predictor
-
-diag(pred) <- 0
-pred
-#>          Subject age height Occasion
-#> Subject        0   0      0        0
-#> age            0   0      0        0
-#> height        -2   2      0        1
-#> Occasion       0   0      0        0
-
-meth <- make.method(dataToImpute)
-meth[1:length(meth)] <- ""
-meth[varsToImpute] <- "2l.norm"
-
-# Multiply impute data
-mi_mice <- mice(
-  as.data.frame(dataToImpute),
-  method = meth,
-  predictorMatrix = pred,
-  m = numImputations,
-  maxit = 5,
-  seed = 52242)
+# Impute data
+imp <- mice::mice(
+  nhanes,
+  maxit = 2,
+  m = 2)
 #> 
 #>  iter imp variable
-#>   1   1  height
-#>   1   2  height
-#>   1   3  height
-#>   1   4  height
-#>   1   5  height
-#>   2   1  height
-#>   2   2  height
-#>   2   3  height
-#>   2   4  height
-#>   2   5  height
-#>   3   1  height
-#>   3   2  height
-#>   3   3  height
-#>   3   4  height
-#>   3   5  height
-#>   4   1  height
-#>   4   2  height
-#>   4   3  height
-#>   4   4  height
-#>   4   5  height
-#>   5   1  height
-#>   5   2  height
-#>   5   3  height
-#>   5   4  height
-#>   5   5  height
+#>   1   1  bmi  hyp  chl
+#>   1   2  bmi  hyp  chl
+#>   2   1  bmi  hyp  chl
+#>   2   2  bmi  hyp  chl
 
-# Summary and diagnostics
-mi_mice
-#> Class: mids
-#> Number of multiple imputations:  5 
-#> Imputation methods:
-#>   Subject       age    height  Occasion 
-#>        ""        "" "2l.norm"        "" 
-#> PredictorMatrix:
-#>          Subject age height Occasion
-#> Subject        0   0      0        0
-#> age            0   0      0        0
-#> height        -2   2      0        1
-#> Occasion       0   0      0        0
+# Fit regression model to multiply imputed data
+fit <- with(
+  data = imp,
+  exp = lm(bmi ~ hyp + chl))
 
-mi_mice$loggedEvents
-#> NULL
+# Pool results across models
+fit_pooled <- mice::pool(fit)
 
-# Mixed model
-fit_lmer <- with(
-  data = mi_mice,
-  expr = lme4::lmer(height ~ age + Occasion + (1|Subject)))
+# Summarize pooled results
+fit_pooled
+#> Class: mipo    m = 2 
+#>          term m    estimate         ubar            b            t dfcom
+#> 1 (Intercept) 2 18.88333656 1.701025e+01 6.5351430303 2.681296e+01    22
+#> 2         hyp 2 -1.57916147 5.488783e+00 0.4312712039 6.135690e+00    22
+#> 3         chl 2  0.05146973 5.190739e-04 0.0000684852 6.218017e-04    22
+#>          df       riv    lambda       fmi
+#> 1  4.727236 0.5762829 0.3655961 0.5297956
+#> 2 15.072400 0.1178598 0.1054334 0.2044315
+#> 3 11.563450 0.1979059 0.1652099 0.2798517
 
-# Model results
-fit_lmer
-#> call :
-#> with.mids(data = mi_mice, expr = lme4::lmer(height ~ age + Occasion + 
-#>     (1 | Subject)))
-#> 
-#> call1 :
-#> mice(data = as.data.frame(dataToImpute), m = numImputations, 
-#>     method = meth, predictorMatrix = pred, maxit = 5, seed = 52242)
-#> 
-#> nmis :
-#> [1]  0  0 25  0
-#> 
-#> analyses :
-#> [[1]]
-#> Linear mixed model fit by REML ['lmerMod']
-#> Formula: height ~ age + Occasion + (1 | Subject)
-#> REML criterion at convergence: 934.9239
-#> Random effects:
-#>  Groups   Name        Std.Dev.
-#>  Subject  (Intercept) 8.018   
-#>  Residual             1.303   
-#> Number of obs: 234, groups:  Subject, 26
-#> Fixed Effects:
-#> (Intercept)          age     Occasion  
-#>     142.600        1.061        1.382  
-#> 
-#> [[2]]
-#> Linear mixed model fit by REML ['lmerMod']
-#> Formula: height ~ age + Occasion + (1 | Subject)
-#> REML criterion at convergence: 947.7378
-#> Random effects:
-#>  Groups   Name        Std.Dev.
-#>  Subject  (Intercept) 8.094   
-#>  Residual             1.342   
-#> Number of obs: 234, groups:  Subject, 26
-#> Fixed Effects:
-#> (Intercept)          age     Occasion  
-#>     143.790        2.011        1.137  
-#> 
-#> [[3]]
-#> Linear mixed model fit by REML ['lmerMod']
-#> Formula: height ~ age + Occasion + (1 | Subject)
-#> REML criterion at convergence: 944.6572
-#> Random effects:
-#>  Groups   Name        Std.Dev.
-#>  Subject  (Intercept) 8.108   
-#>  Residual             1.332   
-#> Number of obs: 234, groups:  Subject, 26
-#> Fixed Effects:
-#> (Intercept)          age     Occasion  
-#>    145.1147       3.0651       0.8655  
-#> 
-#> [[4]]
-#> Linear mixed model fit by REML ['lmerMod']
-#> Formula: height ~ age + Occasion + (1 | Subject)
-#> REML criterion at convergence: 949.791
-#> Random effects:
-#>  Groups   Name        Std.Dev.
-#>  Subject  (Intercept) 8.088   
-#>  Residual             1.349   
-#> Number of obs: 234, groups:  Subject, 26
-#> Fixed Effects:
-#> (Intercept)          age     Occasion  
-#>     144.840        2.834        0.924  
-#> 
-#> [[5]]
-#> Linear mixed model fit by REML ['lmerMod']
-#> Formula: height ~ age + Occasion + (1 | Subject)
-#> REML criterion at convergence: 958.6575
-#> Random effects:
-#>  Groups   Name        Std.Dev.
-#>  Subject  (Intercept) 8.056   
-#>  Residual             1.379   
-#> Number of obs: 234, groups:  Subject, 26
-#> Fixed Effects:
-#> (Intercept)          age     Occasion  
-#>     144.265        2.428        1.047
-summary(fit_lmer)
-#> # A tibble: 15 × 7
-#>    effect term        estimate std.error statistic  nobs df.residual
-#>    <chr>  <chr>          <dbl>     <dbl>     <dbl> <int>       <dbl>
-#>  1 fixed  (Intercept)  143.        3.77     37.8     234         229
-#>  2 fixed  age            1.06      2.79      0.381   234         229
-#>  3 fixed  Occasion       1.38      0.697     1.98    234         229
-#>  4 fixed  (Intercept)  144.        3.87     37.2     234         229
-#>  5 fixed  age            2.01      2.87      0.701   234         229
-#>  6 fixed  Occasion       1.14      0.719     1.58    234         229
-#>  7 fixed  (Intercept)  145.        3.85     37.7     234         229
-#>  8 fixed  age            3.07      2.85      1.08    234         229
-#>  9 fixed  Occasion       0.865     0.713     1.21    234         229
-#> 10 fixed  (Intercept)  145.        3.89     37.3     234         229
-#> 11 fixed  age            2.83      2.88      0.982   234         229
-#> 12 fixed  Occasion       0.924     0.722     1.28    234         229
-#> 13 fixed  (Intercept)  144.        3.96     36.5     234         229
-#> 14 fixed  age            2.43      2.95      0.824   234         229
-#> 15 fixed  Occasion       1.05      0.738     1.42    234         229
-
-# Pooled results
-mice::pool(fit_lmer)
-#> Class: mipo    m = 5 
-#>          term m   estimate       ubar          b          t dfcom       df
-#> 1 (Intercept) 5 144.121907 14.9447772 0.98736515 16.1296153   229 163.8540
-#> 2         age 5   2.279907  8.2234136 0.62555930  8.9740847   229 152.5285
-#> 3    Occasion 5   1.071071  0.5156753 0.04134577  0.5652902   229 148.0510
-#>          riv     lambda        fmi
-#> 1 0.07928109 0.07345731 0.08456334
-#> 2 0.09128462 0.08364877 0.09543248
-#> 3 0.09621351 0.08776895 0.09984741
+summary(fit_pooled)
+#>          term    estimate  std.error  statistic        df    p.value
+#> 1 (Intercept) 18.88333656 5.17812328  3.6467530  4.727236 0.01632623
+#> 2         hyp -1.57916147 2.47703245 -0.6375215 15.072400 0.53335079
+#> 3         chl  0.05146973 0.02493595  2.0640772 11.563450 0.06219456
 
 # Session Info
 sessionInfo()
-#> R version 4.5.1 (2025-06-13 ucrt)
+#> R version 4.5.2 (2025-10-31 ucrt)
 #> Platform: x86_64-w64-mingw32/x64
-#> Running under: Windows 10 x64 (build 19045)
+#> Running under: Windows 11 x64 (build 26100)
 #> 
 #> Matrix products: default
 #>   LAPACK version 3.12.1
@@ -362,26 +116,24 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] broom.mixed_0.2.9.6 lme4_1.1-38         Matrix_1.7-4       
-#> [4] mice_3.19.0         nlme_3.1-168       
+#> [1] mice_3.19.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] utf8_1.2.6        future_1.68.0     generics_0.1.4    tidyr_1.3.2      
-#>  [5] shape_1.4.6.1     lattice_0.22-7    listenv_0.10.0    digest_0.6.39    
-#>  [9] magrittr_2.0.4    mitml_0.4-5       evaluate_1.0.5    grid_4.5.1       
-#> [13] iterators_1.0.14  fastmap_1.2.0     foreach_1.5.2     jomo_2.7-6       
-#> [17] glmnet_4.1-10     nnet_7.3-20       backports_1.5.0   survival_3.8-3   
-#> [21] purrr_1.2.0       codetools_0.2-20  reformulas_0.4.3  Rdpack_2.6.4     
-#> [25] cli_3.6.5         rlang_1.1.6       rbibutils_2.4     parallelly_1.46.0
-#> [29] splines_4.5.1     reprex_2.1.1      withr_3.0.2       yaml_2.3.12      
-#> [33] otel_0.2.0        pan_1.9           parallel_4.5.1    tools_4.5.1      
-#> [37] nloptr_2.2.1      minqa_1.2.8       dplyr_1.1.4       forcats_1.0.1    
-#> [41] globals_0.18.0    boot_1.3-32       broom_1.0.11      rpart_4.1.24     
-#> [45] vctrs_0.6.5       R6_2.6.1          lifecycle_1.0.4   fs_1.6.6         
-#> [49] MASS_7.3-65       furrr_0.3.1       pkgconfig_2.0.3   pillar_1.11.1    
-#> [53] glue_1.8.0        Rcpp_1.1.0        xfun_0.55         tibble_3.3.0     
-#> [57] tidyselect_1.2.1  rstudioapi_0.17.1 knitr_1.51        htmltools_0.5.9  
-#> [61] rmarkdown_2.30    compiler_4.5.1
+#>  [1] generics_0.1.4     tidyr_1.3.2        shape_1.4.6.1      lattice_0.22-7    
+#>  [5] lme4_1.1-38        digest_0.6.39      magrittr_2.0.4     mitml_0.4-5       
+#>  [9] evaluate_1.0.5     grid_4.5.2         iterators_1.0.14   fastmap_1.2.0     
+#> [13] foreach_1.5.2      jomo_2.7-6         glmnet_4.1-10      Matrix_1.7-4      
+#> [17] nnet_7.3-20        backports_1.5.0    survival_3.8-3     purrr_1.2.0       
+#> [21] codetools_0.2-20   reformulas_0.4.3.1 Rdpack_2.6.4       cli_3.6.5         
+#> [25] rlang_1.1.6        rbibutils_2.4      splines_4.5.2      reprex_2.1.1      
+#> [29] withr_3.0.2        yaml_2.3.12        otel_0.2.0         pan_1.9           
+#> [33] tools_4.5.2        nloptr_2.2.1       minqa_1.2.8        dplyr_1.1.4       
+#> [37] boot_1.3-32        broom_1.0.11       rpart_4.1.24       vctrs_0.6.5       
+#> [41] R6_2.6.1           lifecycle_1.0.5    fs_1.6.6           MASS_7.3-65       
+#> [45] pkgconfig_2.0.3    pillar_1.11.1      glue_1.8.0         Rcpp_1.1.0        
+#> [49] xfun_0.55          tibble_3.3.0       tidyselect_1.2.1   rstudioapi_0.17.1 
+#> [53] knitr_1.51         htmltools_0.5.9    nlme_3.1-168       rmarkdown_2.30    
+#> [57] compiler_4.5.2
 ```
 
-<sup>Created on 2026-01-07 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>
+<sup>Created on 2026-01-08 with [reprex v2.1.1](https://reprex.tidyverse.org)</sup>
