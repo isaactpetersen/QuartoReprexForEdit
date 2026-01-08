@@ -70,10 +70,21 @@ fit_lmer <- with(
 # Model results
 fit_lmer
 summary(fit_lmer)
+```
+
+```r
+#| df-print: paged
 
 # Pooled results
 mice::pool(fit_lmer)
+```
 
+```r
+# Pooled results
+mice::pool(fit_lmer)
+```
+
+```r
 # Session Info
 sessionInfo()
 ```
