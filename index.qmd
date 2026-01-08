@@ -2,7 +2,9 @@
 title: "Minimal Reproducible Example"
 ---
 
-# Quarto Reprex (via GitHub Actions on Linux)
+# Quarto Reprex (via GitHub Actions on Linux) {#sec-quarto}
+
+The following reprex is from Quarto (via GitHub Actions on Linux):
 
 ```{r}
 # Load libraries
@@ -76,11 +78,15 @@ mice::pool(fit_lmer)
 sessionInfo()
 ```
 
-# Reprex on Linux
+# Reprex on Linux {#sec-linux}
+
+The following reprex on Linux (via GitHub Actions) is from the output of [`reprex.R`](https://github.com/isaactpetersen/QuartoReprexForEdit/blob/main/reprex.R) and is included via `{{< include _includes/reprex.md >}}`:
 
 {{< include _includes/reprex.md >}}
 
-# Reprex on PC
+# Reprex on PC {#sec-pc}
+
+The following reprex is from running the code locally on my PC:
 
 ```r
 # Load libraries
