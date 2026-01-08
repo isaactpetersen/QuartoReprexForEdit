@@ -18,6 +18,11 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Check Quarto installation
+        run: |
+          quarto --version
+          quarto check
+
       #- name: Setup Python and Jupyter
       #  uses: actions/setup-python@v4
       #  with:
