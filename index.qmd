@@ -78,10 +78,6 @@ sessionInfo()
 
 # Reprex on Linux
 
-```{r}
-reprex::reprex(input = "reprex.R")
-```
-
 {{< include reprex_reprex.md >}}
 
 # Reprex on PC
