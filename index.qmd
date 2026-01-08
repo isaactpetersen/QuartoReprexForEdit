@@ -78,7 +78,7 @@ sessionInfo()
 
 # Reprex on Linux
 
-{{< include reprex_reprex.md >}}
+{{< include _includes/reprex.md >}}
 
 # Reprex on PC
 
