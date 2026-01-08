@@ -2,6 +2,8 @@
 title: "Minimal Reproducible Example"
 ---
 
+# Quarto Reprex (via GitHub Actions on Linux)
+
 ```{r}
 # Load libraries
 library("nlme")
@@ -79,6 +81,8 @@ sessionInfo()
 ```{r}
 reprex::reprex(input = "reprex.R")
 ```
+
+{{< include reprex_reprex.md >}}
 
 # Reprex on PC
 
