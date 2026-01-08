@@ -2,3 +2,8 @@ Package: placeholder
 Title: QuartoReprex
 Version: 1.0.0
 Imports:
+  reprex,
+  nlme,
+  mice,
+  broom.mixed,
+  lme4
