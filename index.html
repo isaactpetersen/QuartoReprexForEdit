@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 </head>
@@ -113,15 +115,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#reprex-on-linux" id="toc-reprex-on-linux" class="nav-link active" data-scroll-target="#reprex-on-linux"><span class="header-section-number">1</span> Reprex on Linux</a></li>
+  <li><a href="#reprex-on-pc" id="toc-reprex-on-pc" class="nav-link" data-scroll-target="#reprex-on-pc"><span class="header-section-number">2</span> Reprex on PC</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/QuartoReprex/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Minimal Reproducible Example</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Minimal Reproducible Example</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -138,10 +147,651 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"nlme"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'mice'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    cbind, rbind</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'lme4'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:mice':
+
+    toenail</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:nlme':
+
+    lmList</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom.mixed"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Oxboys, <span class="at">package =</span> <span class="st">"nlme"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data &amp; add missing values</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Oxboys)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Subject <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Subject)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Occasion <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Occasion)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">52242</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Oxboys_addNA), <span class="dv">25</span>), <span class="st">"height"</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>dataToImpute <span class="ot">&lt;-</span> Oxboys_addNA</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataToImpute)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Subject"],"name":[1],"type":["int"],"align":["right"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["height"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Occasion"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"13","2":"-1.0000","3":"140.5","4":"1","_rn_":"1"},{"1":"13","2":"-0.7479","3":"143.4","4":"2","_rn_":"2"},{"1":"13","2":"-0.4630","3":"144.8","4":"3","_rn_":"3"},{"1":"13","2":"-0.1643","3":"147.1","4":"4","_rn_":"4"},{"1":"13","2":"-0.0027","3":"147.7","4":"5","_rn_":"5"},{"1":"13","2":"0.2466","3":"150.2","4":"6","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Subject age height Occasion
+Subject        0   0      0        0
+age            0   0      0        0
+height        -2   2      0        1
+Occasion       0   0      0        0</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ iter imp variable
+  1   1  height
+  1   2  height
+  1   3  height
+  1   4  height
+  1   5  height
+  2   1  height
+  2   2  height
+  2   3  height
+  2   4  height
+  2   5  height
+  3   1  height
+  3   2  height
+  3   3  height
+  3   4  height
+  3   5  height
+  4   1  height
+  4   2  height
+  4   3  height
+  4   4  height
+  4   5  height
+  5   1  height
+  5   2  height
+  5   3  height
+  5   4  height
+  5   5  height</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mi_mice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Class: mids
+Number of multiple imputations:  5 
+Imputation methods:
+  Subject       age    height  Occasion 
+       ""        "" "2l.norm"        "" 
+PredictorMatrix:
+         Subject age height Occasion
+Subject        0   0      0        0
+age            0   0      0        0
+height        -2   2      0        1
+Occasion       0   0      0        0</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>fit_lmer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>call :
+with.mids(data = mi_mice, expr = lme4::lmer(height ~ age + Occasion + 
+    (1 | Subject)))
+
+call1 :
+mice(data = as.data.frame(dataToImpute), m = numImputations, 
+    method = meth, predictorMatrix = pred, maxit = 5, seed = 52242)
+
+nmis :
+[1]  0  0 25  0
+
+analyses :
+[[1]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: height ~ age + Occasion + (1 | Subject)
+REML criterion at convergence: 934.9239
+Random effects:
+ Groups   Name        Std.Dev.
+ Subject  (Intercept) 8.018   
+ Residual             1.303   
+Number of obs: 234, groups:  Subject, 26
+Fixed Effects:
+(Intercept)          age     Occasion  
+    142.600        1.061        1.382  
+
+[[2]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: height ~ age + Occasion + (1 | Subject)
+REML criterion at convergence: 947.7378
+Random effects:
+ Groups   Name        Std.Dev.
+ Subject  (Intercept) 8.094   
+ Residual             1.342   
+Number of obs: 234, groups:  Subject, 26
+Fixed Effects:
+(Intercept)          age     Occasion  
+    143.790        2.011        1.137  
+
+[[3]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: height ~ age + Occasion + (1 | Subject)
+REML criterion at convergence: 944.6572
+Random effects:
+ Groups   Name        Std.Dev.
+ Subject  (Intercept) 8.108   
+ Residual             1.332   
+Number of obs: 234, groups:  Subject, 26
+Fixed Effects:
+(Intercept)          age     Occasion  
+   145.1147       3.0651       0.8655  
+
+[[4]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: height ~ age + Occasion + (1 | Subject)
+REML criterion at convergence: 949.791
+Random effects:
+ Groups   Name        Std.Dev.
+ Subject  (Intercept) 8.088   
+ Residual             1.349   
+Number of obs: 234, groups:  Subject, 26
+Fixed Effects:
+(Intercept)          age     Occasion  
+    144.840        2.834        0.924  
+
+[[5]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: height ~ age + Occasion + (1 | Subject)
+REML criterion at convergence: 958.6575
+Random effects:
+ Groups   Name        Std.Dev.
+ Subject  (Intercept) 8.056   
+ Residual             1.379   
+Number of obs: 234, groups:  Subject, 26
+Fixed Effects:
+(Intercept)          age     Occasion  
+    144.265        2.428        1.047  </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["effect"],"name":[1],"type":["chr"],"align":["left"]},{"label":["term"],"name":[2],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["nobs"],"name":[6],"type":["int"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"fixed","2":"(Intercept)","3":"142.5997228","4":"3.7690197","5":"37.8346982","6":"234","7":"229"},{"1":"fixed","2":"age","3":"1.0614933","4":"2.7851398","5":"0.3811275","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.3816669","4":"0.6974436","5":"1.9810447","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"143.7898267","4":"3.8699720","5":"37.1552632","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.0108190","4":"2.8698447","5":"0.7006717","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.1374912","4":"0.7186551","5":"1.5828055","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"145.1146986","4":"3.8465114","5":"37.7263147","6":"234","7":"229"},{"1":"fixed","2":"age","3":"3.0650767","4":"2.8478444","5":"1.0762795","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"0.8654705","4":"0.7131458","5":"1.2135954","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"144.8402500","4":"3.8858785","5":"37.2734892","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.8337679","4":"2.8844146","5":"0.9824413","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"0.9239697","4":"0.7223036","5":"1.2791986","6":"234","7":"229"},{"1":"fixed","2":"(Intercept)","3":"144.2650388","4":"3.9555015","5":"36.4719968","6":"234","7":"229"},{"1":"fixed","2":"age","3":"2.4283781","4":"2.9485571","5":"0.8235818","6":"234","7":"229"},{"1":"fixed","2":"Occasion","3":"1.0467552","4":"0.7383659","5":"1.4176645","6":"234","7":"229"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11] [0 ×
+11]&gt;", : replacement element 1 has 1 row to replace 0 rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11] [0 ×
+11]&gt;", : replacement element 2 has 1 row to replace 0 rows</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! arguments imply differing number of rows: 1, 0</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Session Info</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 24.04.3 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: UTC
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] broom.mixed_0.2.9.6 lme4_1.1-38         Matrix_1.7-4       
+[4] mice_3.19.0         nlme_3.1-168       
+
+loaded via a namespace (and not attached):
+ [1] future_1.68.0     generics_0.1.4    tidyr_1.3.2       shape_1.4.6.1    
+ [5] lattice_0.22-7    listenv_0.10.0    digest_0.6.39     magrittr_2.0.4   
+ [9] mitml_0.4-5       evaluate_1.0.5    grid_4.5.2        iterators_1.0.14 
+[13] fastmap_1.2.0     foreach_1.5.2     jomo_2.7-6        jsonlite_2.0.0   
+[17] glmnet_4.1-10     nnet_7.3-20       backports_1.5.0   survival_3.8-3   
+[21] purrr_1.2.0       codetools_0.2-20  reformulas_0.4.3  Rdpack_2.6.4     
+[25] cli_3.6.5         rlang_1.1.6       rbibutils_2.4     parallelly_1.46.0
+[29] splines_4.5.2     withr_3.0.2       yaml_2.3.12       pan_1.9          
+[33] parallel_4.5.2    tools_4.5.2       nloptr_2.2.1      minqa_1.2.8      
+[37] dplyr_1.1.4       forcats_1.0.1     globals_0.18.0    boot_1.3-32      
+[41] broom_1.0.11      vctrs_0.6.5       R6_2.6.1          rpart_4.1.24     
+[45] lifecycle_1.0.4   MASS_7.3-65       furrr_0.3.1       pkgconfig_2.0.3  
+[49] pillar_1.11.1     glue_1.8.0        Rcpp_1.1.0        xfun_0.55        
+[53] tibble_3.3.0      tidyselect_1.2.1  knitr_1.51        htmltools_0.5.9  
+[57] rmarkdown_2.30    compiler_4.5.2   </code></pre>
+</div>
+</div>
+<section id="reprex-on-linux" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Reprex on Linux</h1>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>reprex<span class="sc">::</span><span class="fu">reprex</span>(<span class="at">input =</span> <span class="st">"reprex.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Non-interactive session, setting `html_preview = FALSE`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Preparing reprex as `.R` file:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  'reprex_reprex.R'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Rendering reprex...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Writing reprex file:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  '/home/runner/work/QuartoReprexForEdit/QuartoReprexForEdit/reprex_reprex.md'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CLIPR_ALLOW has not been set, so clipr will not run interactively</code></pre>
+</div>
+</div>
+</section>
+<section id="reprex-on-pc" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Reprex on PC</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"nlme"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'mice'</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     filter</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     cbind, rbind</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: Matrix</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'lme4'</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:mice':</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     toenail</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:nlme':</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     lmList</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom.mixed"</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Oxboys, <span class="at">package =</span> <span class="st">"nlme"</span>)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data &amp; add missing values</span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Oxboys)</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Subject <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Subject)</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Occasion <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Occasion)</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">52242</span>)</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Oxboys_addNA), <span class="dv">25</span>), <span class="st">"height"</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>dataToImpute <span class="ot">&lt;-</span> Oxboys_addNA</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataToImpute)</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Subject     age height Occasion</span></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      13 -1.0000  140.5        1</span></span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      13 -0.7479  143.4        2</span></span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      13 -0.4630  144.8        3</span></span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      13 -0.1643  147.1        4</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      13 -0.0027  147.7        5</span></span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      13  0.2466  150.2        6</span></span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a>pred</span>
+<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Subject age height Occasion</span></span>
+<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Subject        0   0      0        0</span></span>
+<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; age            0   0      0        0</span></span>
+<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; height        -2   2      0        1</span></span>
+<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Occasion       0   0      0        0</span></span>
+<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
+<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
+<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
+<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
+<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
+<span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
+<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
+<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span>
+<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  iter imp variable</span></span>
+<span id="cb36-81"><a href="#cb36-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   1  height</span></span>
+<span id="cb36-82"><a href="#cb36-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   2  height</span></span>
+<span id="cb36-83"><a href="#cb36-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   3  height</span></span>
+<span id="cb36-84"><a href="#cb36-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   4  height</span></span>
+<span id="cb36-85"><a href="#cb36-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   5  height</span></span>
+<span id="cb36-86"><a href="#cb36-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   1  height</span></span>
+<span id="cb36-87"><a href="#cb36-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   2  height</span></span>
+<span id="cb36-88"><a href="#cb36-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   3  height</span></span>
+<span id="cb36-89"><a href="#cb36-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   4  height</span></span>
+<span id="cb36-90"><a href="#cb36-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   5  height</span></span>
+<span id="cb36-91"><a href="#cb36-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   1  height</span></span>
+<span id="cb36-92"><a href="#cb36-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   2  height</span></span>
+<span id="cb36-93"><a href="#cb36-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   3  height</span></span>
+<span id="cb36-94"><a href="#cb36-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   4  height</span></span>
+<span id="cb36-95"><a href="#cb36-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   5  height</span></span>
+<span id="cb36-96"><a href="#cb36-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   1  height</span></span>
+<span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   2  height</span></span>
+<span id="cb36-98"><a href="#cb36-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   3  height</span></span>
+<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   4  height</span></span>
+<span id="cb36-100"><a href="#cb36-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   5  height</span></span>
+<span id="cb36-101"><a href="#cb36-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   1  height</span></span>
+<span id="cb36-102"><a href="#cb36-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   2  height</span></span>
+<span id="cb36-103"><a href="#cb36-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   3  height</span></span>
+<span id="cb36-104"><a href="#cb36-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   4  height</span></span>
+<span id="cb36-105"><a href="#cb36-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   5  height</span></span>
+<span id="cb36-106"><a href="#cb36-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-107"><a href="#cb36-107" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
+<span id="cb36-108"><a href="#cb36-108" aria-hidden="true" tabindex="-1"></a>mi_mice</span>
+<span id="cb36-109"><a href="#cb36-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class: mids</span></span>
+<span id="cb36-110"><a href="#cb36-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of multiple imputations:  5 </span></span>
+<span id="cb36-111"><a href="#cb36-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Imputation methods:</span></span>
+<span id="cb36-112"><a href="#cb36-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Subject       age    height  Occasion </span></span>
+<span id="cb36-113"><a href="#cb36-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        ""        "" "2l.norm"        "" </span></span>
+<span id="cb36-114"><a href="#cb36-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PredictorMatrix:</span></span>
+<span id="cb36-115"><a href="#cb36-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Subject age height Occasion</span></span>
+<span id="cb36-116"><a href="#cb36-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Subject        0   0      0        0</span></span>
+<span id="cb36-117"><a href="#cb36-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; age            0   0      0        0</span></span>
+<span id="cb36-118"><a href="#cb36-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; height        -2   2      0        1</span></span>
+<span id="cb36-119"><a href="#cb36-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Occasion       0   0      0        0</span></span>
+<span id="cb36-120"><a href="#cb36-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-121"><a href="#cb36-121" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span>
+<span id="cb36-122"><a href="#cb36-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb36-123"><a href="#cb36-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-124"><a href="#cb36-124" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
+<span id="cb36-125"><a href="#cb36-125" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb36-126"><a href="#cb36-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
+<span id="cb36-127"><a href="#cb36-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
+<span id="cb36-128"><a href="#cb36-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-129"><a href="#cb36-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
+<span id="cb36-130"><a href="#cb36-130" aria-hidden="true" tabindex="-1"></a>fit_lmer</span>
+<span id="cb36-131"><a href="#cb36-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; call :</span></span>
+<span id="cb36-132"><a href="#cb36-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; with.mids(data = mi_mice, expr = lme4::lmer(height ~ age + Occasion + </span></span>
+<span id="cb36-133"><a href="#cb36-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     (1 | Subject)))</span></span>
+<span id="cb36-134"><a href="#cb36-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-135"><a href="#cb36-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; call1 :</span></span>
+<span id="cb36-136"><a href="#cb36-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mice(data = as.data.frame(dataToImpute), m = numImputations, </span></span>
+<span id="cb36-137"><a href="#cb36-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     method = meth, predictorMatrix = pred, maxit = 5, seed = 52242)</span></span>
+<span id="cb36-138"><a href="#cb36-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-139"><a href="#cb36-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nmis :</span></span>
+<span id="cb36-140"><a href="#cb36-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  0  0 25  0</span></span>
+<span id="cb36-141"><a href="#cb36-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-142"><a href="#cb36-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; analyses :</span></span>
+<span id="cb36-143"><a href="#cb36-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb36-144"><a href="#cb36-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb36-145"><a href="#cb36-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb36-146"><a href="#cb36-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 934.9239</span></span>
+<span id="cb36-147"><a href="#cb36-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb36-148"><a href="#cb36-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb36-149"><a href="#cb36-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.018   </span></span>
+<span id="cb36-150"><a href="#cb36-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.303   </span></span>
+<span id="cb36-151"><a href="#cb36-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb36-152"><a href="#cb36-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb36-153"><a href="#cb36-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb36-154"><a href="#cb36-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     142.600        1.061        1.382  </span></span>
+<span id="cb36-155"><a href="#cb36-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-156"><a href="#cb36-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb36-157"><a href="#cb36-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb36-158"><a href="#cb36-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb36-159"><a href="#cb36-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 947.7378</span></span>
+<span id="cb36-160"><a href="#cb36-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb36-161"><a href="#cb36-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb36-162"><a href="#cb36-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.094   </span></span>
+<span id="cb36-163"><a href="#cb36-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.342   </span></span>
+<span id="cb36-164"><a href="#cb36-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb36-165"><a href="#cb36-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb36-166"><a href="#cb36-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb36-167"><a href="#cb36-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     143.790        2.011        1.137  </span></span>
+<span id="cb36-168"><a href="#cb36-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-169"><a href="#cb36-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb36-170"><a href="#cb36-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb36-171"><a href="#cb36-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb36-172"><a href="#cb36-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 944.6572</span></span>
+<span id="cb36-173"><a href="#cb36-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb36-174"><a href="#cb36-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb36-175"><a href="#cb36-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.108   </span></span>
+<span id="cb36-176"><a href="#cb36-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.332   </span></span>
+<span id="cb36-177"><a href="#cb36-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb36-178"><a href="#cb36-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb36-179"><a href="#cb36-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb36-180"><a href="#cb36-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    145.1147       3.0651       0.8655  </span></span>
+<span id="cb36-181"><a href="#cb36-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-182"><a href="#cb36-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
+<span id="cb36-183"><a href="#cb36-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb36-184"><a href="#cb36-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb36-185"><a href="#cb36-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 949.791</span></span>
+<span id="cb36-186"><a href="#cb36-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb36-187"><a href="#cb36-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb36-188"><a href="#cb36-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.088   </span></span>
+<span id="cb36-189"><a href="#cb36-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.349   </span></span>
+<span id="cb36-190"><a href="#cb36-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb36-191"><a href="#cb36-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb36-192"><a href="#cb36-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb36-193"><a href="#cb36-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     144.840        2.834        0.924  </span></span>
+<span id="cb36-194"><a href="#cb36-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-195"><a href="#cb36-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[5]]</span></span>
+<span id="cb36-196"><a href="#cb36-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb36-197"><a href="#cb36-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb36-198"><a href="#cb36-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 958.6575</span></span>
+<span id="cb36-199"><a href="#cb36-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb36-200"><a href="#cb36-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb36-201"><a href="#cb36-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.056   </span></span>
+<span id="cb36-202"><a href="#cb36-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.379   </span></span>
+<span id="cb36-203"><a href="#cb36-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb36-204"><a href="#cb36-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb36-205"><a href="#cb36-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb36-206"><a href="#cb36-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     144.265        2.428        1.047</span></span>
+<span id="cb36-207"><a href="#cb36-207" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span>
+<span id="cb36-208"><a href="#cb36-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 15 × 7</span></span>
+<span id="cb36-209"><a href="#cb36-209" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    effect term        estimate std.error statistic  nobs df.residual</span></span>
+<span id="cb36-210"><a href="#cb36-210" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;</span></span>
+<span id="cb36-211"><a href="#cb36-211" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 fixed  (Intercept)  143.        3.77     37.8     234         229</span></span>
+<span id="cb36-212"><a href="#cb36-212" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 fixed  age            1.06      2.79      0.381   234         229</span></span>
+<span id="cb36-213"><a href="#cb36-213" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 fixed  Occasion       1.38      0.697     1.98    234         229</span></span>
+<span id="cb36-214"><a href="#cb36-214" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 fixed  (Intercept)  144.        3.87     37.2     234         229</span></span>
+<span id="cb36-215"><a href="#cb36-215" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 fixed  age            2.01      2.87      0.701   234         229</span></span>
+<span id="cb36-216"><a href="#cb36-216" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 fixed  Occasion       1.14      0.719     1.58    234         229</span></span>
+<span id="cb36-217"><a href="#cb36-217" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 fixed  (Intercept)  145.        3.85     37.7     234         229</span></span>
+<span id="cb36-218"><a href="#cb36-218" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 fixed  age            3.07      2.85      1.08    234         229</span></span>
+<span id="cb36-219"><a href="#cb36-219" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 fixed  Occasion       0.865     0.713     1.21    234         229</span></span>
+<span id="cb36-220"><a href="#cb36-220" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 fixed  (Intercept)  145.        3.89     37.3     234         229</span></span>
+<span id="cb36-221"><a href="#cb36-221" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 fixed  age            2.83      2.88      0.982   234         229</span></span>
+<span id="cb36-222"><a href="#cb36-222" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 fixed  Occasion       0.924     0.722     1.28    234         229</span></span>
+<span id="cb36-223"><a href="#cb36-223" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 fixed  (Intercept)  144.        3.96     36.5     234         229</span></span>
+<span id="cb36-224"><a href="#cb36-224" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 fixed  age            2.43      2.95      0.824   234         229</span></span>
+<span id="cb36-225"><a href="#cb36-225" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 fixed  Occasion       1.05      0.738     1.42    234         229</span></span>
+<span id="cb36-226"><a href="#cb36-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-227"><a href="#cb36-227" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
+<span id="cb36-228"><a href="#cb36-228" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span>
+<span id="cb36-229"><a href="#cb36-229" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class: mipo    m = 5 </span></span>
+<span id="cb36-230"><a href="#cb36-230" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          term m   estimate       ubar          b          t dfcom       df</span></span>
+<span id="cb36-231"><a href="#cb36-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 5 144.121907 14.9447772 0.98736515 16.1296153   229 163.8540</span></span>
+<span id="cb36-232"><a href="#cb36-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         age 5   2.279907  8.2234136 0.62555930  8.9740847   229 152.5285</span></span>
+<span id="cb36-233"><a href="#cb36-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    Occasion 5   1.071071  0.5156753 0.04134577  0.5652902   229 148.0510</span></span>
+<span id="cb36-234"><a href="#cb36-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          riv     lambda        fmi</span></span>
+<span id="cb36-235"><a href="#cb36-235" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.07928109 0.07345731 0.08456334</span></span>
+<span id="cb36-236"><a href="#cb36-236" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.09128462 0.08364877 0.09543248</span></span>
+<span id="cb36-237"><a href="#cb36-237" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 0.09621351 0.08776895 0.09984741</span></span>
+<span id="cb36-238"><a href="#cb36-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-239"><a href="#cb36-239" aria-hidden="true" tabindex="-1"></a><span class="co"># Session Info</span></span>
+<span id="cb36-240"><a href="#cb36-240" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb36-241"><a href="#cb36-241" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.5.1 (2025-06-13 ucrt)</span></span>
+<span id="cb36-242"><a href="#cb36-242" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64</span></span>
+<span id="cb36-243"><a href="#cb36-243" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19045)</span></span>
+<span id="cb36-244"><a href="#cb36-244" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-245"><a href="#cb36-245" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
+<span id="cb36-246"><a href="#cb36-246" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   LAPACK version 3.12.1</span></span>
+<span id="cb36-247"><a href="#cb36-247" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-248"><a href="#cb36-248" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb36-249"><a href="#cb36-249" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] LC_COLLATE=English_United States.utf8 </span></span>
+<span id="cb36-250"><a href="#cb36-250" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
+<span id="cb36-251"><a href="#cb36-251" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
+<span id="cb36-252"><a href="#cb36-252" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
+<span id="cb36-253"><a href="#cb36-253" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
+<span id="cb36-254"><a href="#cb36-254" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-255"><a href="#cb36-255" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; time zone: America/Chicago</span></span>
+<span id="cb36-256"><a href="#cb36-256" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tzcode source: internal</span></span>
+<span id="cb36-257"><a href="#cb36-257" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-258"><a href="#cb36-258" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb36-259"><a href="#cb36-259" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb36-260"><a href="#cb36-260" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-261"><a href="#cb36-261" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb36-262"><a href="#cb36-262" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] broom.mixed_0.2.9.6 lme4_1.1-38         Matrix_1.7-4       </span></span>
+<span id="cb36-263"><a href="#cb36-263" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] mice_3.19.0         nlme_3.1-168       </span></span>
+<span id="cb36-264"><a href="#cb36-264" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb36-265"><a href="#cb36-265" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb36-266"><a href="#cb36-266" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] utf8_1.2.6        future_1.68.0     generics_0.1.4    tidyr_1.3.2      </span></span>
+<span id="cb36-267"><a href="#cb36-267" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] shape_1.4.6.1     lattice_0.22-7    listenv_0.10.0    digest_0.6.39    </span></span>
+<span id="cb36-268"><a href="#cb36-268" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] magrittr_2.0.4    mitml_0.4-5       evaluate_1.0.5    grid_4.5.1       </span></span>
+<span id="cb36-269"><a href="#cb36-269" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] iterators_1.0.14  fastmap_1.2.0     foreach_1.5.2     jomo_2.7-6       </span></span>
+<span id="cb36-270"><a href="#cb36-270" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] glmnet_4.1-10     nnet_7.3-20       backports_1.5.0   survival_3.8-3   </span></span>
+<span id="cb36-271"><a href="#cb36-271" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] purrr_1.2.0       codetools_0.2-20  reformulas_0.4.3  Rdpack_2.6.4     </span></span>
+<span id="cb36-272"><a href="#cb36-272" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] cli_3.6.5         rlang_1.1.6       rbibutils_2.4     parallelly_1.46.0</span></span>
+<span id="cb36-273"><a href="#cb36-273" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [29] splines_4.5.1     reprex_2.1.1      withr_3.0.2       yaml_2.3.12      </span></span>
+<span id="cb36-274"><a href="#cb36-274" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [33] otel_0.2.0        pan_1.9           parallel_4.5.1    tools_4.5.1      </span></span>
+<span id="cb36-275"><a href="#cb36-275" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] nloptr_2.2.1      minqa_1.2.8       dplyr_1.1.4       forcats_1.0.1    </span></span>
+<span id="cb36-276"><a href="#cb36-276" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [41] globals_0.18.0    boot_1.3-32       broom_1.0.11      rpart_4.1.24     </span></span>
+<span id="cb36-277"><a href="#cb36-277" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [45] vctrs_0.6.5       R6_2.6.1          lifecycle_1.0.4   fs_1.6.6         </span></span>
+<span id="cb36-278"><a href="#cb36-278" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] MASS_7.3-65       furrr_0.3.1       pkgconfig_2.0.3   pillar_1.11.1    </span></span>
+<span id="cb36-279"><a href="#cb36-279" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [53] glue_1.8.0        Rcpp_1.1.0        xfun_0.55         tibble_3.3.0     </span></span>
+<span id="cb36-280"><a href="#cb36-280" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [57] tidyselect_1.2.1  rstudioapi_0.17.1 knitr_1.51        htmltools_0.5.9  </span></span>
+<span id="cb36-281"><a href="#cb36-281" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [61] rmarkdown_2.30    compiler_4.5.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><sup>Created on 2026-01-07 with <a href="https://reprex.tidyverse.org">reprex v2.1.1</a></sup></p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -600,13 +1250,380 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minimal Reproducible Example"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minimal Reproducible Example"</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"nlme"</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom.mixed"</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Oxboys, <span class="at">package =</span> <span class="st">"nlme"</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data &amp; add missing values</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Oxboys)</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Subject <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Subject)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Occasion <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Occasion)</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">52242</span>)</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Oxboys_addNA), <span class="dv">25</span>), <span class="st">"height"</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>dataToImpute <span class="ot">&lt;-</span> Oxboys_addNA</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataToImpute)</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>pred</span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a>mi_mice</span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
+<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>fit_lmer</span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Session Info</span></span>
+<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-78"><a href="#cb37-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-79"><a href="#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reprex on Linux</span></span>
+<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a>reprex<span class="sc">::</span><span class="fu">reprex</span>(<span class="at">input =</span> <span class="st">"reprex.R"</span>)</span>
+<span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reprex on PC</span></span>
+<span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-89"><a href="#cb37-89" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb37-90"><a href="#cb37-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb37-91"><a href="#cb37-91" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"nlme"</span>)</span>
+<span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span>
+<span id="cb37-93"><a href="#cb37-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'mice'</span></span>
+<span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
+<span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     filter</span></span>
+<span id="cb37-98"><a href="#cb37-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb37-99"><a href="#cb37-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     cbind, rbind</span></span>
+<span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb37-102"><a href="#cb37-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: Matrix</span></span>
+<span id="cb37-103"><a href="#cb37-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-104"><a href="#cb37-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'lme4'</span></span>
+<span id="cb37-105"><a href="#cb37-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:mice':</span></span>
+<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-107"><a href="#cb37-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     toenail</span></span>
+<span id="cb37-108"><a href="#cb37-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from 'package:nlme':</span></span>
+<span id="cb37-109"><a href="#cb37-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-110"><a href="#cb37-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     lmList</span></span>
+<span id="cb37-111"><a href="#cb37-111" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom.mixed"</span>)</span>
+<span id="cb37-112"><a href="#cb37-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-113"><a href="#cb37-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb37-114"><a href="#cb37-114" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Oxboys, <span class="at">package =</span> <span class="st">"nlme"</span>)</span>
+<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-116"><a href="#cb37-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data &amp; add missing values</span></span>
+<span id="cb37-117"><a href="#cb37-117" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Oxboys)</span>
+<span id="cb37-118"><a href="#cb37-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-119"><a href="#cb37-119" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Subject <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Subject)</span>
+<span id="cb37-120"><a href="#cb37-120" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA<span class="sc">$</span>Occasion <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(Oxboys_addNA<span class="sc">$</span>Occasion)</span>
+<span id="cb37-121"><a href="#cb37-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-122"><a href="#cb37-122" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">52242</span>)</span>
+<span id="cb37-123"><a href="#cb37-123" aria-hidden="true" tabindex="-1"></a>Oxboys_addNA[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Oxboys_addNA), <span class="dv">25</span>), <span class="st">"height"</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb37-124"><a href="#cb37-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a>dataToImpute <span class="ot">&lt;-</span> Oxboys_addNA</span>
+<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-127"><a href="#cb37-127" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataToImpute)</span>
+<span id="cb37-128"><a href="#cb37-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Subject     age height Occasion</span></span>
+<span id="cb37-129"><a href="#cb37-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      13 -1.0000  140.5        1</span></span>
+<span id="cb37-130"><a href="#cb37-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      13 -0.7479  143.4        2</span></span>
+<span id="cb37-131"><a href="#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      13 -0.4630  144.8        3</span></span>
+<span id="cb37-132"><a href="#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      13 -0.1643  147.1        4</span></span>
+<span id="cb37-133"><a href="#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      13 -0.0027  147.7        5</span></span>
+<span id="cb37-134"><a href="#cb37-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      13  0.2466  150.2        6</span></span>
+<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputation settings</span></span>
+<span id="cb37-137"><a href="#cb37-137" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb37-138"><a href="#cb37-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-139"><a href="#cb37-139" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"height"</span>)</span>
+<span id="cb37-140"><a href="#cb37-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-141"><a href="#cb37-141" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">make.predictorMatrix</span>(dataToImpute)</span>
+<span id="cb37-142"><a href="#cb37-142" aria-hidden="true" tabindex="-1"></a>pred[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pred)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-143"><a href="#cb37-143" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Subject"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb37-144"><a href="#cb37-144" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"Occasion"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a>pred[varsToImpute, varsToImpute] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb37-147"><a href="#cb37-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-148"><a href="#cb37-148" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(pred) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-149"><a href="#cb37-149" aria-hidden="true" tabindex="-1"></a>pred</span>
+<span id="cb37-150"><a href="#cb37-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Subject age height Occasion</span></span>
+<span id="cb37-151"><a href="#cb37-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Subject        0   0      0        0</span></span>
+<span id="cb37-152"><a href="#cb37-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; age            0   0      0        0</span></span>
+<span id="cb37-153"><a href="#cb37-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; height        -2   2      0        1</span></span>
+<span id="cb37-154"><a href="#cb37-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Occasion       0   0      0        0</span></span>
+<span id="cb37-155"><a href="#cb37-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-156"><a href="#cb37-156" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> <span class="fu">make.method</span>(dataToImpute)</span>
+<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(meth)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb37-158"><a href="#cb37-158" aria-hidden="true" tabindex="-1"></a>meth[varsToImpute] <span class="ot">&lt;-</span> <span class="st">"2l.norm"</span></span>
+<span id="cb37-159"><a href="#cb37-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-160"><a href="#cb37-160" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply impute data</span></span>
+<span id="cb37-161"><a href="#cb37-161" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> <span class="fu">mice</span>(</span>
+<span id="cb37-162"><a href="#cb37-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(dataToImpute),</span>
+<span id="cb37-163"><a href="#cb37-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> meth,</span>
+<span id="cb37-164"><a href="#cb37-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> pred,</span>
+<span id="cb37-165"><a href="#cb37-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb37-166"><a href="#cb37-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>,</span>
+<span id="cb37-167"><a href="#cb37-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span>
+<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-169"><a href="#cb37-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  iter imp variable</span></span>
+<span id="cb37-170"><a href="#cb37-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   1  height</span></span>
+<span id="cb37-171"><a href="#cb37-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   2  height</span></span>
+<span id="cb37-172"><a href="#cb37-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   3  height</span></span>
+<span id="cb37-173"><a href="#cb37-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   4  height</span></span>
+<span id="cb37-174"><a href="#cb37-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1   5  height</span></span>
+<span id="cb37-175"><a href="#cb37-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   1  height</span></span>
+<span id="cb37-176"><a href="#cb37-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   2  height</span></span>
+<span id="cb37-177"><a href="#cb37-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   3  height</span></span>
+<span id="cb37-178"><a href="#cb37-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   4  height</span></span>
+<span id="cb37-179"><a href="#cb37-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   2   5  height</span></span>
+<span id="cb37-180"><a href="#cb37-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   1  height</span></span>
+<span id="cb37-181"><a href="#cb37-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   2  height</span></span>
+<span id="cb37-182"><a href="#cb37-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   3  height</span></span>
+<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   4  height</span></span>
+<span id="cb37-184"><a href="#cb37-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3   5  height</span></span>
+<span id="cb37-185"><a href="#cb37-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   1  height</span></span>
+<span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   2  height</span></span>
+<span id="cb37-187"><a href="#cb37-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   3  height</span></span>
+<span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   4  height</span></span>
+<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   4   5  height</span></span>
+<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   1  height</span></span>
+<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   2  height</span></span>
+<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   3  height</span></span>
+<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   4  height</span></span>
+<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   5   5  height</span></span>
+<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary and diagnostics</span></span>
+<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a>mi_mice</span>
+<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class: mids</span></span>
+<span id="cb37-199"><a href="#cb37-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of multiple imputations:  5 </span></span>
+<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Imputation methods:</span></span>
+<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Subject       age    height  Occasion </span></span>
+<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        ""        "" "2l.norm"        "" </span></span>
+<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PredictorMatrix:</span></span>
+<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Subject age height Occasion</span></span>
+<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Subject        0   0      0        0</span></span>
+<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; age            0   0      0        0</span></span>
+<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; height        -2   2      0        1</span></span>
+<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Occasion       0   0      0        0</span></span>
+<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span>
+<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixed model</span></span>
+<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a>fit_lmer <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice,</span>
+<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(height <span class="sc">~</span> age <span class="sc">+</span> Occasion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Subject)))</span>
+<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a><span class="co"># Model results</span></span>
+<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a>fit_lmer</span>
+<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; call :</span></span>
+<span id="cb37-221"><a href="#cb37-221" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; with.mids(data = mi_mice, expr = lme4::lmer(height ~ age + Occasion + </span></span>
+<span id="cb37-222"><a href="#cb37-222" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     (1 | Subject)))</span></span>
+<span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; call1 :</span></span>
+<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mice(data = as.data.frame(dataToImpute), m = numImputations, </span></span>
+<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     method = meth, predictorMatrix = pred, maxit = 5, seed = 52242)</span></span>
+<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nmis :</span></span>
+<span id="cb37-229"><a href="#cb37-229" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  0  0 25  0</span></span>
+<span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; analyses :</span></span>
+<span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 934.9239</span></span>
+<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb37-238"><a href="#cb37-238" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.018   </span></span>
+<span id="cb37-239"><a href="#cb37-239" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.303   </span></span>
+<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     142.600        1.061        1.382  </span></span>
+<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb37-247"><a href="#cb37-247" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb37-248"><a href="#cb37-248" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 947.7378</span></span>
+<span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.094   </span></span>
+<span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.342   </span></span>
+<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb37-256"><a href="#cb37-256" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     143.790        2.011        1.137  </span></span>
+<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 944.6572</span></span>
+<span id="cb37-262"><a href="#cb37-262" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.108   </span></span>
+<span id="cb37-265"><a href="#cb37-265" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.332   </span></span>
+<span id="cb37-266"><a href="#cb37-266" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb37-267"><a href="#cb37-267" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb37-268"><a href="#cb37-268" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    145.1147       3.0651       0.8655  </span></span>
+<span id="cb37-270"><a href="#cb37-270" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
+<span id="cb37-272"><a href="#cb37-272" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 949.791</span></span>
+<span id="cb37-275"><a href="#cb37-275" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb37-276"><a href="#cb37-276" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb37-277"><a href="#cb37-277" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.088   </span></span>
+<span id="cb37-278"><a href="#cb37-278" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.349   </span></span>
+<span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     144.840        2.834        0.924  </span></span>
+<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-284"><a href="#cb37-284" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[5]]</span></span>
+<span id="cb37-285"><a href="#cb37-285" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Formula: height ~ age + Occasion + (1 | Subject)</span></span>
+<span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; REML criterion at convergence: 958.6575</span></span>
+<span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Random effects:</span></span>
+<span id="cb37-289"><a href="#cb37-289" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups   Name        Std.Dev.</span></span>
+<span id="cb37-290"><a href="#cb37-290" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Subject  (Intercept) 8.056   </span></span>
+<span id="cb37-291"><a href="#cb37-291" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Residual             1.379   </span></span>
+<span id="cb37-292"><a href="#cb37-292" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of obs: 234, groups:  Subject, 26</span></span>
+<span id="cb37-293"><a href="#cb37-293" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fixed Effects:</span></span>
+<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)          age     Occasion  </span></span>
+<span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     144.265        2.428        1.047</span></span>
+<span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer)</span>
+<span id="cb37-297"><a href="#cb37-297" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 15 × 7</span></span>
+<span id="cb37-298"><a href="#cb37-298" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    effect term        estimate std.error statistic  nobs df.residual</span></span>
+<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;</span></span>
+<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 fixed  (Intercept)  143.        3.77     37.8     234         229</span></span>
+<span id="cb37-301"><a href="#cb37-301" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 fixed  age            1.06      2.79      0.381   234         229</span></span>
+<span id="cb37-302"><a href="#cb37-302" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 fixed  Occasion       1.38      0.697     1.98    234         229</span></span>
+<span id="cb37-303"><a href="#cb37-303" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 fixed  (Intercept)  144.        3.87     37.2     234         229</span></span>
+<span id="cb37-304"><a href="#cb37-304" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 fixed  age            2.01      2.87      0.701   234         229</span></span>
+<span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 fixed  Occasion       1.14      0.719     1.58    234         229</span></span>
+<span id="cb37-306"><a href="#cb37-306" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 fixed  (Intercept)  145.        3.85     37.7     234         229</span></span>
+<span id="cb37-307"><a href="#cb37-307" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 fixed  age            3.07      2.85      1.08    234         229</span></span>
+<span id="cb37-308"><a href="#cb37-308" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 fixed  Occasion       0.865     0.713     1.21    234         229</span></span>
+<span id="cb37-309"><a href="#cb37-309" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 fixed  (Intercept)  145.        3.89     37.3     234         229</span></span>
+<span id="cb37-310"><a href="#cb37-310" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 fixed  age            2.83      2.88      0.982   234         229</span></span>
+<span id="cb37-311"><a href="#cb37-311" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 fixed  Occasion       0.924     0.722     1.28    234         229</span></span>
+<span id="cb37-312"><a href="#cb37-312" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 fixed  (Intercept)  144.        3.96     36.5     234         229</span></span>
+<span id="cb37-313"><a href="#cb37-313" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 fixed  age            2.43      2.95      0.824   234         229</span></span>
+<span id="cb37-314"><a href="#cb37-314" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 fixed  Occasion       1.05      0.738     1.42    234         229</span></span>
+<span id="cb37-315"><a href="#cb37-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-316"><a href="#cb37-316" aria-hidden="true" tabindex="-1"></a><span class="co"># Pooled results</span></span>
+<span id="cb37-317"><a href="#cb37-317" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(fit_lmer)</span>
+<span id="cb37-318"><a href="#cb37-318" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class: mipo    m = 5 </span></span>
+<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          term m   estimate       ubar          b          t dfcom       df</span></span>
+<span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 5 144.121907 14.9447772 0.98736515 16.1296153   229 163.8540</span></span>
+<span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         age 5   2.279907  8.2234136 0.62555930  8.9740847   229 152.5285</span></span>
+<span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    Occasion 5   1.071071  0.5156753 0.04134577  0.5652902   229 148.0510</span></span>
+<span id="cb37-323"><a href="#cb37-323" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          riv     lambda        fmi</span></span>
+<span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.07928109 0.07345731 0.08456334</span></span>
+<span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.09128462 0.08364877 0.09543248</span></span>
+<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 0.09621351 0.08776895 0.09984741</span></span>
+<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a><span class="co"># Session Info</span></span>
+<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.5.1 (2025-06-13 ucrt)</span></span>
+<span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64</span></span>
+<span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19045)</span></span>
+<span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
+<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   LAPACK version 3.12.1</span></span>
+<span id="cb37-336"><a href="#cb37-336" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-337"><a href="#cb37-337" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] LC_COLLATE=English_United States.utf8 </span></span>
+<span id="cb37-339"><a href="#cb37-339" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
+<span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
+<span id="cb37-341"><a href="#cb37-341" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
+<span id="cb37-342"><a href="#cb37-342" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
+<span id="cb37-343"><a href="#cb37-343" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; time zone: America/Chicago</span></span>
+<span id="cb37-345"><a href="#cb37-345" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tzcode source: internal</span></span>
+<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb37-348"><a href="#cb37-348" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb37-349"><a href="#cb37-349" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb37-351"><a href="#cb37-351" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] broom.mixed_0.2.9.6 lme4_1.1-38         Matrix_1.7-4       </span></span>
+<span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] mice_3.19.0         nlme_3.1-168       </span></span>
+<span id="cb37-353"><a href="#cb37-353" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-354"><a href="#cb37-354" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb37-355"><a href="#cb37-355" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] utf8_1.2.6        future_1.68.0     generics_0.1.4    tidyr_1.3.2      </span></span>
+<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] shape_1.4.6.1     lattice_0.22-7    listenv_0.10.0    digest_0.6.39    </span></span>
+<span id="cb37-357"><a href="#cb37-357" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] magrittr_2.0.4    mitml_0.4-5       evaluate_1.0.5    grid_4.5.1       </span></span>
+<span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] iterators_1.0.14  fastmap_1.2.0     foreach_1.5.2     jomo_2.7-6       </span></span>
+<span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] glmnet_4.1-10     nnet_7.3-20       backports_1.5.0   survival_3.8-3   </span></span>
+<span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] purrr_1.2.0       codetools_0.2-20  reformulas_0.4.3  Rdpack_2.6.4     </span></span>
+<span id="cb37-361"><a href="#cb37-361" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] cli_3.6.5         rlang_1.1.6       rbibutils_2.4     parallelly_1.46.0</span></span>
+<span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [29] splines_4.5.1     reprex_2.1.1      withr_3.0.2       yaml_2.3.12      </span></span>
+<span id="cb37-363"><a href="#cb37-363" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [33] otel_0.2.0        pan_1.9           parallel_4.5.1    tools_4.5.1      </span></span>
+<span id="cb37-364"><a href="#cb37-364" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] nloptr_2.2.1      minqa_1.2.8       dplyr_1.1.4       forcats_1.0.1    </span></span>
+<span id="cb37-365"><a href="#cb37-365" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [41] globals_0.18.0    boot_1.3-32       broom_1.0.11      rpart_4.1.24     </span></span>
+<span id="cb37-366"><a href="#cb37-366" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [45] vctrs_0.6.5       R6_2.6.1          lifecycle_1.0.4   fs_1.6.6         </span></span>
+<span id="cb37-367"><a href="#cb37-367" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] MASS_7.3-65       furrr_0.3.1       pkgconfig_2.0.3   pillar_1.11.1    </span></span>
+<span id="cb37-368"><a href="#cb37-368" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [53] glue_1.8.0        Rcpp_1.1.0        xfun_0.55         tibble_3.3.0     </span></span>
+<span id="cb37-369"><a href="#cb37-369" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [57] tidyselect_1.2.1  rstudioapi_0.17.1 knitr_1.51        htmltools_0.5.9  </span></span>
+<span id="cb37-370"><a href="#cb37-370" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [61] rmarkdown_2.30    compiler_4.5.1</span></span>
+<span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">sup</span><span class="dt">&gt;</span>Created on 2026-01-07 with <span class="co">[</span><span class="ot">reprex v2.1.1</span><span class="co">](https://reprex.tidyverse.org)</span><span class="dt">&lt;/</span><span class="kw">sup</span><span class="dt">&gt;</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/QuartoReprex/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/isaactpetersen/QuartoReprex/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
