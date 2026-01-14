@@ -1,5 +1,7 @@
 # Load libraries
 library("mice")
+library("rmarkdown")
+library("knitr")
 
 # Impute data
 imp <- mice::mice(
@@ -18,7 +20,15 @@ fit_pooled <- mice::pool(fit)
 # Summarize pooled results
 fit_pooled
 
+rmarkdown::paged_table(fit_pooled)
+
+knitr::kable(fit_pooled)
+
 summary(fit_pooled)
+
+rmarkdown::paged_table(summary(fit_pooled))
+
+knitr::kable(summary(fit_pooled))
 
 # Session Info
 sessionInfo()

@@ -4,3 +4,5 @@ Version: 1.0.0
 Imports:
   reprex,
   mice,
+  rmarkdown,
+  knitr
