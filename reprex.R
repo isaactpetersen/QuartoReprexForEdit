@@ -26,7 +26,7 @@ knitr::kable(fit_pooled)
 
 summary(fit_pooled)
 
-rmarkdown::paged_table(summary(fit_pooled))
+#rmarkdown::paged_table(summary(fit_pooled))
 
 knitr::kable(summary(fit_pooled))
 
