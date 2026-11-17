@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Minimal Reproducible Example – Quarto Reprex</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -66,15 +72,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fd1faf6fd93e4e6d207ae0f9db51d78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ded4168630e1422961a6247c4ac5fe91.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -108,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="quarto-light">
+<body class="quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
@@ -116,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
@@ -127,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/QuartoReprex/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/QuartoReprex/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -241,7 +247,7 @@ Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11]
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["term"],"name":[1],"type":["fct"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"22.89795413","3":"4.46081810","4":"5.1331289","5":"19.99868","6":"5.065916e-05"},{"1":"hyp","2":"-0.87681835","3":"2.31769627","4":"-0.3783146","5":"20.14922","6":"7.091534e-01"},{"1":"chl","2":"0.02606399","3":"0.02143278","4":"1.2160805","5":"20.23883","6":"2.379482e-01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["term"],"name":[1],"type":["fct"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"21.87624449","3":"6.16452630","4":"3.54873083","5":"3.634423","6":"0.02791644"},{"1":"hyp","2":"0.21338125","3":"3.15583250","4":"0.06761488","5":"3.175769","6":"0.95012637"},{"1":"chl","2":"0.02512758","3":"0.02534517","4":"0.99141496","5":"18.198300","6":"0.33448299"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -252,7 +258,7 @@ Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11]
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["term"],"name":[1],"type":["fct"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"22.89795413","3":"4.46081810","4":"5.1331289","5":"19.99868","6":"5.065916e-05"},{"1":"hyp","2":"-0.87681835","3":"2.31769627","4":"-0.3783146","5":"20.14922","6":"7.091534e-01"},{"1":"chl","2":"0.02606399","3":"0.02143278","4":"1.2160805","5":"20.23883","6":"2.379482e-01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["term"],"name":[1],"type":["fct"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"21.87624449","3":"6.16452630","4":"3.54873083","5":"3.634423","6":"0.02791644"},{"1":"hyp","2":"0.21338125","3":"3.15583250","4":"0.06761488","5":"3.175769","6":"0.95012637"},{"1":"chl","2":"0.02512758","3":"0.02534517","4":"0.99141496","5":"18.198300","6":"0.33448299"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -275,27 +281,27 @@ Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11]
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">22.8979541</td>
-<td style="text-align: right;">4.4608181</td>
-<td style="text-align: right;">5.1331289</td>
-<td style="text-align: right;">19.99868</td>
-<td style="text-align: right;">0.0000507</td>
+<td style="text-align: right;">21.8762445</td>
+<td style="text-align: right;">6.1645263</td>
+<td style="text-align: right;">3.5487308</td>
+<td style="text-align: right;">3.634423</td>
+<td style="text-align: right;">0.0279164</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">hyp</td>
-<td style="text-align: right;">-0.8768184</td>
-<td style="text-align: right;">2.3176963</td>
-<td style="text-align: right;">-0.3783146</td>
-<td style="text-align: right;">20.14922</td>
-<td style="text-align: right;">0.7091534</td>
+<td style="text-align: right;">0.2133813</td>
+<td style="text-align: right;">3.1558325</td>
+<td style="text-align: right;">0.0676149</td>
+<td style="text-align: right;">3.175769</td>
+<td style="text-align: right;">0.9501264</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chl</td>
-<td style="text-align: right;">0.0260640</td>
-<td style="text-align: right;">0.0214328</td>
-<td style="text-align: right;">1.2160805</td>
-<td style="text-align: right;">20.23883</td>
-<td style="text-align: right;">0.2379482</td>
+<td style="text-align: right;">0.0251276</td>
+<td style="text-align: right;">0.0253452</td>
+<td style="text-align: right;">0.9914150</td>
+<td style="text-align: right;">18.198300</td>
+<td style="text-align: right;">0.3344830</td>
 </tr>
 </tbody>
 </table>
@@ -306,13 +312,13 @@ Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11]
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.2 (2025-10-31)
+<pre><code>R version 4.6.2 (2026-10-29)
 Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 24.04.3 LTS
+Running under: Ubuntu 26.04.1 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.32.so;  LAPACK version 3.12.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -330,20 +336,20 @@ other attached packages:
 [1] mice_3.19.0
 
 loaded via a namespace (and not attached):
- [1] generics_0.1.4     tidyr_1.3.2        shape_1.4.6.1      lattice_0.22-7    
- [5] lme4_1.1-38        digest_0.6.39      magrittr_2.0.4     mitml_0.4-5       
- [9] evaluate_1.0.5     grid_4.5.2         iterators_1.0.14   fastmap_1.2.0     
-[13] foreach_1.5.2      jomo_2.7-6         jsonlite_2.0.0     glmnet_4.1-10     
-[17] Matrix_1.7-4       nnet_7.3-20        backports_1.5.0    survival_3.8-3    
-[21] purrr_1.2.1        codetools_0.2-20   reformulas_0.4.3.1 Rdpack_2.6.4      
-[25] cli_3.6.5          rlang_1.1.7        rbibutils_2.4      splines_4.5.2     
-[29] yaml_2.3.12        pan_1.9            tools_4.5.2        nloptr_2.2.1      
-[33] minqa_1.2.8        dplyr_1.1.4        boot_1.3-32        broom_1.0.11      
-[37] rpart_4.1.24       vctrs_0.6.5        R6_2.6.1           lifecycle_1.0.5   
-[41] MASS_7.3-65        pkgconfig_2.0.3    pillar_1.11.1      glue_1.8.0        
-[45] Rcpp_1.1.1         xfun_0.55          tibble_3.3.1       tidyselect_1.2.1  
-[49] knitr_1.51         htmltools_0.5.9    nlme_3.1-168       rmarkdown_2.30    
-[53] compiler_4.5.2    </code></pre>
+ [1] generics_0.1.4   tidyr_1.3.2      shape_1.4.6.1    lattice_0.23-1  
+ [5] lme4_2.1-0       digest_0.6.39    magrittr_2.0.5   mitml_0.4-5     
+ [9] evaluate_1.0.5   grid_4.6.2       iterators_1.0.14 fastmap_1.2.0   
+[13] foreach_1.5.2    jomo_2.7-6       jsonlite_2.0.0   glmnet_5.2      
+[17] Matrix_1.7-6     nnet_7.3-21      backports_1.5.1  survival_3.8-12 
+[21] purrr_1.2.2      codetools_0.2-20 reformulas_0.4.4 Rdpack_2.6.6    
+[25] cli_3.6.6        rlang_1.3.0      rbibutils_2.4.1  splines_4.6.2   
+[29] yaml_2.3.12      otel_0.3.0       pan_2.0          tools_4.6.2     
+[33] nloptr_2.2.1     minqa_1.2.8      dplyr_1.2.1      boot_1.3-32     
+[37] broom_1.0.13     rpart_4.1.27     vctrs_0.7.3      R6_2.6.1        
+[41] stats4_4.6.2     lifecycle_1.0.5  MASS_7.3-66      pkgconfig_2.0.3 
+[45] pillar_1.11.1    glue_1.8.1       Rcpp_1.1.2       xfun_0.62       
+[49] tibble_3.3.1     tidyselect_1.2.1 knitr_1.52       htmltools_0.5.9 
+[53] nlme_3.1-171     rmarkdown_2.32   compiler_4.6.2  </code></pre>
 </div>
 </div>
 </section>
@@ -387,13 +393,13 @@ loaded via a namespace (and not attached):
 <span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>fit_pooled</span>
 <span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class: mipo    m = 2 </span></span>
 <span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          term m    estimate         ubar            b            t dfcom</span></span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 2 21.97793581 17.563547132 2.046637e+00 2.063350e+01    22</span></span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         hyp 2 -0.70966656  4.601393917 1.996993e+00 7.596883e+00    22</span></span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3         chl 2  0.02609377  0.000444732 8.088413e-05 5.660582e-04    22</span></span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          df       riv    lambda       fmi</span></span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 12.471933 0.1747913 0.1487850 0.2588184</span></span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  4.218565 0.6509961 0.3943050 0.5621209</span></span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  9.189038 0.2728074 0.2143352 0.3432485</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 2 20.14542938 1.565281e+01 2.164375e+00 1.889937e+01    22</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         hyp 2 -1.31347257 3.459661e+00 2.008294e-02 3.489786e+00    22</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3         chl 2  0.04155934 3.996583e-04 6.455495e-05 4.964907e-04    22</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         df         riv      lambda        fmi</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 11.21534 0.207410869 0.171781515 0.28830611</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 20.03533 0.008707328 0.008632165 0.09470585</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 10.05874 0.242288055 0.195033715 0.31831762</span></span>
 <span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(fit_pooled)</span>
 <span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, is_list, value = list(`3` = "&lt;df[,11] [0 ×</span></span>
@@ -408,10 +414,10 @@ loaded via a namespace (and not attached):
 <span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! replacement has 1 row, data has 0</span></span>
 <span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_pooled)</span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          term    estimate  std.error  statistic        df      p.value</span></span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 21.97793581 4.54241160  4.8383849 12.471933 0.0003640749</span></span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         hyp -0.70966656 2.75624444 -0.2574759  4.218565 0.8088869900</span></span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3         chl  0.02609377 0.02379198  1.0967463  9.189038 0.3006608198</span></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          term    estimate  std.error  statistic       df      p.value</span></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 (Intercept) 20.14542938 4.34734108  4.6339657 11.21534 0.0006877677</span></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         hyp -1.31347257 1.86809683 -0.7031073 20.03533 0.4900791882</span></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3         chl  0.04155934 0.02228207  1.8651473 10.05874 0.0915631801</span></span>
 <span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a><span class="co">#rmarkdown::paged_table(summary(fit_pooled)) # commented out because crashes reprex</span></span>
 <span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a></span>
@@ -422,7 +428,7 @@ loaded via a namespace (and not attached):
 <col style="width: 17%">
 <col style="width: 15%">
 <col style="width: 17%">
-<col style="width: 15%">
+<col style="width: 14%">
 <col style="width: 15%">
 </colgroup>
 <thead>
@@ -438,40 +444,40 @@ loaded via a namespace (and not attached):
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">21.9779358</td>
-<td style="text-align: right;">4.542412</td>
-<td style="text-align: right;">4.8383849</td>
-<td style="text-align: right;">12.471933</td>
-<td style="text-align: right;">0.0003641</td>
+<td style="text-align: right;">20.1454294</td>
+<td style="text-align: right;">4.3473411</td>
+<td style="text-align: right;">4.6339657</td>
+<td style="text-align: right;">11.21534</td>
+<td style="text-align: right;">0.0006878</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">hyp</td>
-<td style="text-align: right;">-0.7096666</td>
-<td style="text-align: right;">2.756244</td>
-<td style="text-align: right;">-0.2574759</td>
-<td style="text-align: right;">4.218565</td>
-<td style="text-align: right;">0.8088870</td>
+<td style="text-align: right;">-1.3134726</td>
+<td style="text-align: right;">1.8680968</td>
+<td style="text-align: right;">-0.7031073</td>
+<td style="text-align: right;">20.03533</td>
+<td style="text-align: right;">0.4900792</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chl</td>
-<td style="text-align: right;">0.0260938</td>
-<td style="text-align: right;">0.023792</td>
-<td style="text-align: right;">1.0967463</td>
-<td style="text-align: right;">9.189038</td>
-<td style="text-align: right;">0.3006608</td>
+<td style="text-align: right;">0.0415593</td>
+<td style="text-align: right;">0.0222821</td>
+<td style="text-align: right;">1.8651473</td>
+<td style="text-align: right;">10.05874</td>
+<td style="text-align: right;">0.0915632</td>
 </tr>
 </tbody>
 </table>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Session Info</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.5.2 (2025-10-31)</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.6.2 (2026-10-29)</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Ubuntu 24.04.3 LTS</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Ubuntu 26.04.1 LTS</span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.32.so;  LAPACK version 3.12.0</span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
@@ -486,24 +492,24 @@ loaded via a namespace (and not attached):
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] knitr_1.51     rmarkdown_2.30 mice_3.19.0   </span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] knitr_1.52     rmarkdown_2.32 mice_3.19.0   </span></span>
 <span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] generics_0.1.4     tidyr_1.3.2        shape_1.4.6.1      lattice_0.22-7    </span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] lme4_1.1-38        digest_0.6.39      magrittr_2.0.4     mitml_0.4-5       </span></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] evaluate_1.0.5     grid_4.5.2         iterators_1.0.14   fastmap_1.2.0     </span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] foreach_1.5.2      jomo_2.7-6         glmnet_4.1-10      Matrix_1.7-4      </span></span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] nnet_7.3-20        backports_1.5.0    survival_3.8-3     purrr_1.2.1       </span></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] codetools_0.2-20   reformulas_0.4.3.1 Rdpack_2.6.4       cli_3.6.5         </span></span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] rlang_1.1.7        rbibutils_2.4      splines_4.5.2      reprex_2.1.1      </span></span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [29] withr_3.0.2        yaml_2.3.12        pan_1.9            tools_4.5.2       </span></span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [33] nloptr_2.2.1       minqa_1.2.8        dplyr_1.1.4        boot_1.3-32       </span></span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] broom_1.0.11       vctrs_0.6.5        R6_2.6.1           rpart_4.1.24      </span></span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [41] lifecycle_1.0.5    fs_1.6.6           MASS_7.3-65        pkgconfig_2.0.3   </span></span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [45] pillar_1.11.1      glue_1.8.0         Rcpp_1.1.1         xfun_0.55         </span></span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] tibble_3.3.1       tidyselect_1.2.1   htmltools_0.5.9    nlme_3.1-168      </span></span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [53] compiler_4.5.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><sup>Created on 2026-01-14 with <a href="https://reprex.tidyverse.org">reprex v2.1.1</a></sup></p>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] generics_0.1.4   tidyr_1.3.2      shape_1.4.6.1    lattice_0.23-1  </span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] lme4_2.1-0       digest_0.6.39    magrittr_2.0.5   mitml_0.4-5     </span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] evaluate_1.0.5   grid_4.6.2       iterators_1.0.14 fastmap_1.2.0   </span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] foreach_1.5.2    jomo_2.7-6       glmnet_5.2       Matrix_1.7-6    </span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] nnet_7.3-21      backports_1.5.1  survival_3.8-12  purrr_1.2.2     </span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] codetools_0.2-20 reformulas_0.4.4 Rdpack_2.6.6     cli_3.6.6       </span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] rlang_1.3.0      rbibutils_2.4.1  splines_4.6.2    reprex_2.1.1    </span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [29] withr_3.0.3      yaml_2.3.12      otel_0.3.0       pan_2.0         </span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [33] tools_4.6.2      nloptr_2.2.1     minqa_1.2.8      dplyr_1.2.1     </span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] boot_1.3-32      broom_1.0.13     rpart_4.1.27     vctrs_0.7.3     </span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [41] R6_2.6.1         stats4_4.6.2     lifecycle_1.0.5  fs_2.1.0        </span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [45] MASS_7.3-66      pkgconfig_2.0.3  pillar_1.11.1    glue_1.8.1      </span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] Rcpp_1.1.2       xfun_0.62        tibble_3.3.1     tidyselect_1.2.1</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [53] htmltools_0.5.9  nlme_3.1-171     compiler_4.6.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><sup>Created on 2026-11-17 with <a href="https://reprex.tidyverse.org">reprex v2.1.1</a></sup></p>
 </section>
 <section id="sec-pc" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Reprex on PC</h1>
@@ -761,16 +767,16 @@ loaded via a namespace (and not attached):
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -794,11 +800,30 @@ loaded via a namespace (and not attached):
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/isaactpetersen\.github\.io\/QuartoReprexForEdit\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -812,8 +837,70 @@ loaded via a namespace (and not attached):
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -827,6 +914,7 @@ loaded via a namespace (and not attached):
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -989,44 +1077,54 @@ loaded via a namespace (and not attached):
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1124,6 +1222,9 @@ loaded via a namespace (and not attached):
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minimal Reproducible Example"</span></span>
